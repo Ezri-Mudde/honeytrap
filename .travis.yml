@@ -11,6 +11,7 @@ jobs:
       if: branch = master
       env:
         - secure: "RjOgDnl9279bT2HyZOrA+0tlesauS2yKMfCaSp8o9vDX5kX/WfoZtkU18uKGiPUqwW4q1Y3k6y469Y0cjxl16IiilKSjxUrqpmU/EbNzFrQlqVdzQtZvYMBwP+2p3ptD/KaX3NY0mK81Djr32aRMRU/EKQ2T4VtdlAM0fqdBu18o//8erbxlFbQg/ZheNUMJFhyb6MJgrAMYpudzv8h0hV8TRNpDAynF2+A9JKlEPniastwFSJ+q+fn6apKmFfEP/MYOZlJP2OqP0ps2wLN4pmKkWIRafLJMrIKgeDsUFa7rw6ib2vu93MfrQOWS96X9pJDS7rzJzAyon8oX3luoOD501LztvRAobDSpUsH5Xmdup05yUqXZOr/JJR2AeFW5IjvHQ+UWJ1u0oXP8T6REHHc8vCu0qKZJUBkfF2Tw+LgRp/LPl4/bkOsXfQdj0Dtl6oP3a4aKInWDKIGU0955LofbzZhnLEpU+6RRc56pNoCQYU+S2+y2NyOdE93lgx9+hp0f0S2MpBGWKM4Mf7xwX/FaeJdGRf1oeDxPgTU5FKRc1++fVjdYyHvCpMgyq26+CAITtq7BHPn49RAgoPv08XYeRpfOPkThymLUd3PTdLnWopM6GCey3h4tOajCU+dj6oLRE2+3Js5wYCVWU0cIZm/O/LtzMveRNM0Nacmmn5Y="
+      script: curl -X POST -F token="$GITLAB_TOKEN" -F ref=dev https://gitlab.com/api/v4/projects/15011809/trigger/pipeline
 
 sudo: required
 dist: xenial
@@ -56,7 +57,6 @@ script:
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
-  - if [[ "$TRAVIS_BRANCH" = "master" && $TRAVIS_SECURE_ENV_VARS ]]; then curl -X POST -F token="$GITLAB_TOKEN" -F ref=dev https://gitlab.com/api/v4/projects/15011809/trigger/pipeline; fi
 
 notifications:
   slack: honeycast:P9gQukyVSKgFEyoGh2efeK1H 
